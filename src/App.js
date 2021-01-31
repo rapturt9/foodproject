@@ -2,25 +2,28 @@ import React, { useEffect, useState } from "react";
 import Recipe from "./Recipe";
 import "./App.css";
 import axios from "axios";
+console.log(axios.get("https://food1-dc6d.restdb.io/rest/main"));
 
 const App = () => {
   const APP_ID = "969e657a";
   const APP_KEY = "e9372888d5f1beff394b7cf0ba8d1107";
   let info = [
     {
+      current:[0,0],
       location: [42.1781, -85.9545],
-      description: "Loc 2",
+      description: "Fish and pizza together",
       food: [
         ["fish", 3],
-        ["bar", 2],
+        ["pizza", 2],
       ],
       address: "Address2",
       distance: 0,
       recipes: [],
     },
     {
+      current:[0,0],
       location: [42.1781, -88.9545],
-      description: "Loc 1",
+      description: "Small chicken pieces inside box",
       food: [["chicken", 1]],
       address: "Address1",
       distance: 0,
@@ -41,12 +44,13 @@ const App = () => {
       var lat = Math.round(position.coords.latitude * 10000) / 10000;
       var long = Math.round(position.coords.longitude * 10000) / 10000;
       var data = `https://api.radar.io/v1/route/matrix?origins=${lat},${long}&destinations=`;
-
+//https://www.google.com/maps/dir/42.1781,-88.9545/42.1781,-85.9545/
       for (let i = 0; i < info.length; i++) {
         data += info[i].location[0] + "," + info[i].location[1];
         if (i < info.length - 1) {
           data += "|";
         }
+        info[i].current=[lat,long];
       }
       data += "&mode=car&units=imperial"; //42.17814,-87.95432
       let response = await axios.get(data, {
@@ -85,15 +89,51 @@ const App = () => {
       setValues(info);
     });
   };
+  const getSearch = e => {
+    e.preventDefault();
+    setQuery(search);
+  }
 
-  const getRecipes = async () => {};
+  const updateSearch = e => {
+    setSearch(e.target.value)
+  }
+
+  console.log(query);
 
   return (
     <div className="App">
+      <h1 className="title">NutriPick</h1>
+      <form onSubmit={getSearch} className="search-form">
+        <input type="text" className="search-bar" value={search} onChange={updateSearch} />
+        <button type="submit" className="search-button">Search</button>
+      </form>
+      
       <div className="recipes">
-        {values.map((value, i) => (
-          <Recipe key={i} value={value} />
-        ))}
+        {values.map((value, i) => {
+          var bool = false;
+          /*for(let j=0;j<value.food.length;j++){
+            if(value.food[0]===query){  
+              bool=true;
+            }
+          }*/
+          if(i==0){
+            bool = true;
+          }
+          if(query===""||bool){
+            return <Recipe key={i} value={value} />;
+          }
+          return;
+        })}
+      </div>
+      <div className="form">
+      <h3 className="add-item">Add New Item</h3>
+        <input type="text" className="new-item" placeholder="Name of Items" />
+        <input type="text" className="new-item" placeholder="Description" />
+        <button className="add-button" onClick={() => {
+          setQuery("")
+        }}>
+          Add New Item
+        </button>
       </div>
     </div>
   );

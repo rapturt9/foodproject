@@ -14,6 +14,7 @@
   width: 50%;
   border: none;
   padding: 10px;
+  margin-top: 5%;
 }
 
 .search-button{
@@ -21,10 +22,66 @@
   border: none;
   padding: 10px 20px;
   color: white;
+  margin-top: 5%;
 }
 
 .recipes{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+.add-button{
+  display: block;
+  width: auto;
+  margin-left: auto;
+  padding: 10px 20px;
+  color: white;
+  background: rgb(255, 78, 78);
+  border: none;
+  margin-top: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 5%;
+}
+
+.add-item {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: -30px;
+}
+
+.form {
+  background-color: white;
+  margin: auto;
+  margin-left: 20%;
+  margin-right: 20%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: flex;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.new-item {
+  width: 80%;
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 5%;
+  border-radius: 10px;
+  display: flex;
+  margin-left: 15px;
+  align-items: center;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 40px;
+}
+
+.title{
+  margin-bottom: -40px;
+  text-align: center;
+  margin-top: 0;
+  font-size: 40px;
+  background: rgba(180, 180, 180, 0.788);
 }
