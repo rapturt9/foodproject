@@ -33,7 +33,7 @@ const App = () => {
 
   const [values, setValues] = useState([]);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("chicken");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     getValues();
@@ -44,7 +44,6 @@ const App = () => {
       var lat = Math.round(position.coords.latitude * 10000) / 10000;
       var long = Math.round(position.coords.longitude * 10000) / 10000;
       var data = `https://api.radar.io/v1/route/matrix?origins=${lat},${long}&destinations=`;
-//https://www.google.com/maps/dir/42.1781,-88.9545/42.1781,-85.9545/
       for (let i = 0; i < info.length; i++) {
         data += info[i].location[0] + "," + info[i].location[1];
         if (i < info.length - 1) {
